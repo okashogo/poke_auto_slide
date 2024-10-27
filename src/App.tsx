@@ -7,13 +7,15 @@ const PokemonSlider = () => {
   const [currentNumber, setCurrentNumber] = useState(
     Math.floor(Math.random() * 1025) + 1
   );
-
+  const [inputCurrentNumber, setInputCurrentNumber] = useState<number | null>(
+    null
+  );
   const [intervalTime, setIntervalTime] = useState(3000); // 初期インターバル3秒
 
   // 指定のポケモン番号の前後7体分の番号を取得
   const getAdjacentNumbers = (number: number) => {
     return Array.from({ length: 7 }, (_, index) => {
-      let offsetNumber = (number + index - 3) % 1025;
+      let offsetNumber = (number + index - 2) % 1025;
       return offsetNumber > 0 ? offsetNumber : offsetNumber + 1025;
     });
   };
@@ -53,8 +55,8 @@ const PokemonSlider = () => {
   }, [currentNumber]);
 
   return (
-    <div className="pokemon-slider flex flex-col items-center justify-center">
-      <label className="flex flex-col items-center justify-center gap-2 mt-4">
+    <div className="flex gap-4 flex-col items-center justify-center">
+      <label className="flex items-center justify-center gap-2 mt-4">
         スライド間隔（ミリ秒）:
         <select
           className="border border-gray-300 rounded-md p-1"
@@ -69,19 +71,51 @@ const PokemonSlider = () => {
           <option value={15000}>15秒</option>
         </select>
       </label>
-      {visiblePokemon.map((number) => (
-        <div key={number} className="pokemon flex items-center">
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`}
-            alt={`Pokemon ${number}`}
-            className="w-[150px]"
-          />
-          <div className="flex flex-col items-center w-[100px]">
-            <p>{pokemonData[number - 1]?.name}</p>
-            <p>No. {number}</p>
+      <div className="flex items-center justify-center gap-4">
+        <p>ポケモンNo.</p>
+        <input
+          type="number"
+          className="border border-gray-300 rounded-md p-1"
+          value={inputCurrentNumber ?? ''}
+          onChange={(e) => setInputCurrentNumber(parseInt(e.target.value))}
+        />
+        <button
+          className="w-[100px] p-2 border border-gray-300 rounded-md bg-blue-500 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500"
+          disabled={!inputCurrentNumber}
+          onClick={() => {
+            if (inputCurrentNumber) setCurrentNumber(inputCurrentNumber);
+          }}
+        >
+          設定
+        </button>
+      </div>
+      <div className="pokemon-slider flex flex-col items-center justify-center">
+        {visiblePokemon.map((number) => (
+          <div key={number} className="pokemon flex items-center">
+            <img
+              src={`https://all-pokemon-ierukana.com/img/pokemon/${number.toString().padStart(3, '0')}.png`}
+              alt={`Pokemon ${number}`}
+              className="w-[150px]"
+            />
+            <div className="flex flex-col items-center w-[100px]">
+              <p
+                className={`${
+                  currentNumber === number ? 'text-blue-500 font-bold' : ''
+                } text-center`}
+              >
+                {pokemonData[number - 1]?.name}
+              </p>
+              <p
+                className={`${
+                  currentNumber === number ? 'text-blue-500 font-bold' : ''
+                } text-center`}
+              >
+                No. {number}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
