@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/poke_auto_slide/static/css/main.206b99ac.css",
-    "main.js": "/poke_auto_slide/static/js/main.d311bde6.js",
+    "main.css": "/poke_auto_slide/static/css/main.2dd52daa.css",
+    "main.js": "/poke_auto_slide/static/js/main.72d0677d.js",
     "static/js/453.46423c3e.chunk.js": "/poke_auto_slide/static/js/453.46423c3e.chunk.js",
     "index.html": "/poke_auto_slide/index.html",
-    "main.206b99ac.css.map": "/poke_auto_slide/static/css/main.206b99ac.css.map",
-    "main.d311bde6.js.map": "/poke_auto_slide/static/js/main.d311bde6.js.map",
+    "main.2dd52daa.css.map": "/poke_auto_slide/static/css/main.2dd52daa.css.map",
+    "main.72d0677d.js.map": "/poke_auto_slide/static/js/main.72d0677d.js.map",
     "453.46423c3e.chunk.js.map": "/poke_auto_slide/static/js/453.46423c3e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.206b99ac.css",
-    "static/js/main.d311bde6.js"
+    "static/css/main.2dd52daa.css",
+    "static/js/main.72d0677d.js"
   ]
 }
